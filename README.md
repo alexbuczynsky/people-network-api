@@ -1,6 +1,6 @@
 # People Network API
 
-[![Build Status](https://travis-ci.org/alexbuczynsky/people-network-api.png)](https://travis-ci.org/alexbuczynsky/people-network-api)
+[![Build Status](https://travis-ci.com/alexbuczynsky/people-network-api.svg?branch=master)](https://travis-ci.com/alexbuczynsky/people-network-api)
 
 
 ## Installation
