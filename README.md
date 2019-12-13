@@ -58,6 +58,7 @@ classDiagram
 
 | Method | Route                                    | Description                                                                                               |
 | ------ | ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| GET    | /api                                     | Swagger documentation is hosted here                                                                      |
 | GET    | /api/users                               | Returns all users and optionally the most / least popular                                                 |
 | GET    | /api/users?popularity=most               | Returns the most popular user. It will return more than one user if they have the same number of friends  |
 | GET    | /api/users?popularity=least              | Returns the least popular user. It will return more than one user if they have the same number of friends |
