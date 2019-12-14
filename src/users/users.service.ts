@@ -6,8 +6,8 @@ import { PopularityQuery } from './queries.interfaces';
 @Injectable()
 export class UsersService {
 
-  private popularityHashInitialized = false;
-  private popularityHash = new Map<UserId, number>();
+  public popularityHashInitialized = false;
+  public popularityHash = new Map<UserId, number>();
 
   constructor(private readonly db: DatabaseService) { }
 
@@ -26,12 +26,12 @@ export class UsersService {
     const users = this.db.users;
 
     if (popularity === PopularityQuery.most) {
-      const user = this.findPopularity('max');
+      const [user] = this.findPopularity('max');
       return [user];
     }
 
     if (popularity === PopularityQuery.least) {
-      const user = this.findPopularity('min');
+      const [user] = this.findPopularity('min');
       return [user];
     }
 
@@ -51,12 +51,12 @@ export class UsersService {
     }
   }
 
-  public findPopularity(type: 'min' | 'max') {
+  public findPopularity(type: 'min' | 'max'): [User, number] {
     if (!this.popularityHashInitialized) {
       this.buildPopularityHash();
     }
 
-    const [userId] = Array.from(this.popularityHash).reduce(([previousId, previousRank], [currentId, currentRank]) => {
+    const [userId, rank] = Array.from(this.popularityHash).reduce(([previousId, previousRank], [currentId, currentRank]) => {
 
       if (type === 'min' && currentRank < previousRank) {
         return [currentId, currentRank];
@@ -68,7 +68,7 @@ export class UsersService {
 
       return [previousId, previousRank];
     });
-    return this.findOne(userId) as User;
+    return [this.findOne(userId) as User, rank];
   }
 
 }
