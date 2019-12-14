@@ -5,13 +5,37 @@
 
 ## Installation
 
+> Note: you will need node.js installed on your machine.
+
 ```bash
 $ npm install
 ```
 
-App will listen on port 3000
+## Running the app
 
-## Prompt
+
+> Note: The app will run at http://localhost:3000/api
+
+```bash
+$ npm run start
+```
+
+## Test
+
+```bash
+$ npm run test
+```
+
+## Recommended API Exploration
+The api has a swagger api located at http://localhost:3000/api
+
+The easiest way to navigate and test the api is to open this interface and try it out.
+
+Here is a screenshot preview of what this view looks like:
+
+![Swagger Docs Preview](./docs/images/api-screenshot.png)
+
+## Original Prompt
 
 > Background: We are trying build an API that answers questions about a network of people.
 
@@ -56,41 +80,15 @@ classDiagram
 
 ## Routes
 
-| Method | Route                                    | Description                                                                                               |
-| ------ | ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| GET    | /api                                     | Swagger documentation is hosted here                                                                      |
-| GET    | /api/users                               | Returns all users and optionally the most / least popular                                                 |
-| GET    | /api/users?popularity=most               | Returns the most popular user. It will return more than one user if they have the same number of friends  |
-| GET    | /api/users?popularity=least              | Returns the least popular user. It will return more than one user if they have the same number of friends |
-| GET    | /api/users                               | Returns all users and optionally the most / least popular                                                 |
-| GET    | /api/users/{id}                          | Returns a user by id                                                                                      |
-| GET    | /api/users/{id}/relationships            | Returns the users the target user knows                                                                   |
-| GET    | /api/users/{id}/relationships/count      | Returns the number of users the target user knows                                                         |
-| GET    | /api/users/{id}/mutual-connections/{id2} | Returns the users both user 1 and user 2 know                                                             |
-
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
+| Method | Route                                       | Description                                                                                               |
+| ------ | ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| GET    | /api                                        | Swagger documentation is hosted here                                                                      |
+| GET    | /api/users                                  | Returns all users and optionally the most / least popular                                                 |
+| GET    | /api/users?popularity=most                  | Returns the most popular user. It will return more than one user if they have the same number of friends  |
+| GET    | /api/users?popularity=least                 | Returns the least popular user. It will return more than one user if they have the same number of friends |
+| GET    | /api/users                                  | Returns all users and optionally the most / least popular                                                 |
+| GET    | /api/users/{id}                             | Returns a user by id                                                                                      |
+| GET    | /api/users/{id}/relationships               | Returns the users the target user knows                                                                   |
+| GET    | /api/users/{id}/relationships/count         | Returns the number of users the target user knows                                                         |
+| GET    | /api/users/{id}/mutual-connections/{id2}    | Returns the users both user 1 and user 2 know                                                             |
+| GET    | /api/users/{id}/degree-connections/{degree} | Returns the users seperated from user {id} by degree N                                                    |
