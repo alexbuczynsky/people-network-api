@@ -27,9 +27,7 @@ There are two data sets attached to the email. First file contains list of 100 p
   - [x] Which connections are common between user `id=X` and user `id=Y`?
     - Note: This is the same requirement as the previous requirement.
   - [x] Which user has the most connections?
-    - Note: All users in the provided data set have the same number of connections, so all are equal in popularity.
   - [x] Which user has the least connections?
-    - Note: All users in the provided data set have the same number of connections, so all are equal in popularity.
 - The APIs should accept “degree” as a parameter
   - [ ] `1st-degree connections` - People you're directly connected.
   - [ ] `2nd-degree connections` - People who are connected to your 1st-degree connections.
