@@ -28,4 +28,10 @@ export class GraphNode<T> {
     this.children.push(node);
     return this;
   }
+
+  public reset(): void {
+    this.visitedBegin = false;
+    this.visitedEnd = false;
+    this.distance = 0;
+  }
 }

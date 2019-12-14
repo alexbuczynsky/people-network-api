@@ -102,7 +102,7 @@ export class UsersController {
 
   @Get(':id/degree-connections/:degree')
   @ApiOperation({
-    summary: 'Who can introduce user id=X to user id=Y?',
+    summary: 'Find users seperated by N degrees',
   })
   public async getDegreeConnectedUsers(@Param('id') userId: string, @Param('degree') degree: string): Promise<User[]> {
 

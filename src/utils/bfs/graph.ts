@@ -28,6 +28,14 @@ export class Graph<T> {
    * @memberof GraphNode
    */
   public calculateDOS(startVal: T, endVal: T): number {
+    const dos = this.internalCalculateDOS(startVal, endVal);
+
+    // reset the graph for the next search
+    this.resetGraph();
+    return dos;
+  }
+
+  private internalCalculateDOS(startVal: T, endVal: T): number {
 
     let startNode = this.get(startVal);
     let endNode = this.get(endVal);
@@ -79,6 +87,18 @@ export class Graph<T> {
     }
 
     return 0;
+  }
+
+  /**
+   * Resets all search nodes back to default values
+   *
+   * @protected
+   * @memberof Graph
+   */
+  protected resetGraph(): void {
+    this.nodes.forEach((node, id) => {
+      node.reset();
+    });
   }
 
 }

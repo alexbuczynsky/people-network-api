@@ -41,16 +41,13 @@ export class UserRelationshipGraph extends Graph<UserId> {
     return [minUserId, count];
   }
 
-  public calculateDOSBetweenTwoUser(userId1: UserId, userId2: UserId): number {
-    return this.calculateDOS(userId1, userId2);
-  }
-
   public getChildrenOfUserByDOS(userId: UserId, degree: number): UserId[] {
     const users: UserId[] = [];
 
     this.nodes.forEach((node, id) => {
-      const dos = this.calculateDOSBetweenTwoUser(userId, id);
-      if (dos === degree) {
+      const dos = this.calculateDOS(userId, id);
+
+      if (id !== userId && dos === degree) {
         users.push(id);
       }
     });
