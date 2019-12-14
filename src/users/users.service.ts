@@ -1,13 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '../database/database.service';
-import { User, UserId } from './user.entity';
+import { User } from './user.entity';
 import { PopularityQuery } from './queries.interfaces';
 
 @Injectable()
 export class UsersService {
-
-  public popularityHashInitialized = false;
-  public popularityHash = new Map<UserId, number>();
 
   constructor(private readonly db: DatabaseService) { }
 
@@ -26,12 +23,12 @@ export class UsersService {
     const users = this.db.users;
 
     if (popularity === PopularityQuery.most) {
-      const [user] = this.findPopularity('max');
+      const [user] = this.findMostPopularUser();
       return [user];
     }
 
     if (popularity === PopularityQuery.least) {
-      const [user] = this.findPopularity('min');
+      const [user] = this.findLeastPopularUser();
       return [user];
     }
 
@@ -42,32 +39,17 @@ export class UsersService {
     return this.db.users.find(x => x.id === id);
   }
 
-  private buildPopularityHash(): void {
-    for (const relationship of this.db.relationships) {
-      for (const userId of relationship.connections) {
-        const rank = this.popularityHash.get(userId) || 0;
-        this.popularityHash.set(userId, rank + 1);
-      }
-    }
+  public findMostPopularUser(): [User, number] {
+
+    const [userId, rank] = this.db.graph.getMostPopularUser();
+
+    return [this.findOne(userId) as User, rank];
   }
 
-  public findPopularity(type: 'min' | 'max'): [User, number] {
-    if (!this.popularityHashInitialized) {
-      this.buildPopularityHash();
-    }
+  public findLeastPopularUser(): [User, number] {
 
-    const [userId, rank] = Array.from(this.popularityHash).reduce(([previousId, previousRank], [currentId, currentRank]) => {
+    const [userId, rank] = this.db.graph.getLeastPopularUser();
 
-      if (type === 'min' && currentRank < previousRank) {
-        return [currentId, currentRank];
-      }
-
-      if (type === 'max' && currentRank > previousRank) {
-        return [currentId, currentRank];
-      }
-
-      return [previousId, previousRank];
-    });
     return [this.findOne(userId) as User, rank];
   }
 

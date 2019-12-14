@@ -1,5 +1,4 @@
-import { UserDto } from './user-dto.interface';
-
-export interface IUser extends UserDto {
+export interface IUser {
   id: number;
+  name: string;
 }

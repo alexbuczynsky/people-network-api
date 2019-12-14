@@ -91,14 +91,24 @@ export class UsersController {
   })
   public async findMutualConnections(@Param('id') user1Id: string, @Param('id2') user2Id: string): Promise<User[]> {
 
-    const firstUserConnections = await this.findUserRelationships(user1Id);
-    const secondUserConnections = await this.findUserRelationships(user2Id);
+    // Make sure both users exist first... either function will throw an error if the user is not found
+    await this.findOne(user1Id);
+    await this.findOne(user2Id);
 
-    const introducers = this.relationshipService.findCommonConnections(
-      firstUserConnections.map(x => x.id),
-      secondUserConnections.map(x => x.id),
-    );
+    const introducers = this.relationshipService.findIntroducers(parseInt(user1Id, 10), parseInt(user2Id, 10));
 
     return this.mapConnectionsToUsers(introducers);
   }
+
+  @Get(':id/degree-connections/:degree')
+  @ApiOperation({
+    summary: 'Who can introduce user id=X to user id=Y?',
+  })
+  public async getDegreeConnectedUsers(@Param('id') userId: string, @Param('degree') degree: string): Promise<User[]> {
+
+    const user = await this.findOne(userId);
+
+    return this.relationshipService.getSetOfDegreeConnectedUsers(user.id, parseInt(degree, 10));
+  }
+
 }

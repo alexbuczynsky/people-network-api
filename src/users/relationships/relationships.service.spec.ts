@@ -17,17 +17,4 @@ describe('RelationshipsService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-
-  it('should find introducers between user 2 and user 12', () => {
-
-    const userA = service.findByUserId(2) as Relationship;
-    const userB = service.findByUserId(12) as Relationship;
-
-    expect(userA).toBeDefined();
-    expect(userB).toBeDefined();
-
-    const relationships = service.findCommonConnections(userA.connections, userB.connections);
-
-    expect(relationships.includes(13)).toBe(true);
-  });
 });

@@ -29,10 +29,10 @@ There are two data sets attached to the email. First file contains list of 100 p
   - [x] Which user has the most connections?
   - [x] Which user has the least connections?
 - The APIs should accept “degree” as a parameter
-  - [ ] `1st-degree connections` - People you're directly connected.
-  - [ ] `2nd-degree connections` - People who are connected to your 1st-degree connections.
-  - [ ] `3rd-degree connections` - People who are connected to your 2nd-degree connections
-  - [ ] `Nth-degree connections` – People who are connected to your (n-1)th-degree connections
+  - [x] `1st-degree connections` - People you're directly connected.
+  - [x] `2nd-degree connections` - People who are connected to your 1st-degree connections.
+  - [x] `3rd-degree connections` - People who are connected to your 2nd-degree connections
+  - [x] `Nth-degree connections` – People who are connected to your (n-1)th-degree connections
  
 
 You are free to use any language and technology in your solution.
