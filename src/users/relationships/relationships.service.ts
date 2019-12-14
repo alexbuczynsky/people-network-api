@@ -2,9 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '../../database/database.service';
 import { Relationship } from './relationship.entity';
 import { User, UserId } from '../user.entity';
-import flatMap from 'lodash/flatMap';
-
-import { Graph, GraphNode } from '../../utils';
 
 @Injectable()
 export class RelationshipsService {
@@ -49,26 +46,11 @@ export class RelationshipsService {
 
   }
 
-  public getUserConnections(userId: number): Relationship['connections'] {
-    const relationship = this.findByUserId(userId);
-
-    if (relationship) {
-      return relationship.connections;
-    } else {
-      return [];
-    }
-  }
-
-  private mapConnectionsToUsers(userIds: UserId[]): User[] {
-    return this.db.users.filter(x => userIds.includes(x.id));
-  }
-
   public getSetOfDegreeConnectedUsers(id: UserId, degree: number): User[] {
     const graph = this.db.graph;
 
     const userIds = graph.getChildrenOfUserByDOS(id, degree);
-
-    return this.mapConnectionsToUsers(userIds);
+    return this.db.users.filter(x => userIds.includes(x.id));
   }
 
 }

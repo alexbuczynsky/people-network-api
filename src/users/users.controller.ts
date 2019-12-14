@@ -2,7 +2,6 @@ import { Controller, Get, Param, NotFoundException, Query, BadRequestException }
 import { UsersService } from './users.service';
 import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { RelationshipsService } from './relationships/relationships.service';
-import { Relationship } from './relationships/relationship.entity';
 import { User } from './user.entity';
 import { PopularityQuery } from './queries.interfaces';
 

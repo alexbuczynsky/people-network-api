@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import mockUsers from './mocks/persons.json';
 import mockRelationships from './mocks/relationships.json';
-import { User, UserId } from '../users/user.entity';
+import { User } from '../users/user.entity';
 import { Relationship } from '../users/relationships/relationship.entity';
-import { UserWithRelationships } from '../users/user-with-relationships.entity';
 import { UserRelationshipGraph } from './user-relationship-graph';
 
 @Injectable()
